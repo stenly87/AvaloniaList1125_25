@@ -1,0 +1,35 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:AvaloniaList1125_25.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaList1125_25.Views.EditNoteWindow"
+        Title="Редактирование заметки"
+        x:DataType="viewModels:EditNoteVM"
+        DataContext="{StaticResource vm}"
+        MinWidth="350"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <!-- экземпляр вьюмодели
+        привязан выше к DataContext окна -->
+        <viewModels:EditNoteVM x:Key="vm" />
+    </Window.Resources>
+    <StackPanel>
+        <TextBlock Text="Заголовок" />
+        <!-- привязки отображают значения вложенного объекта EditNote -->
+        <TextBox Text="{Binding Path=EditNote.Title}" />
+        <TextBlock Text="Содержимое" />
+        <TextBox Text="{Binding Path=EditNote.Content}" />
+        <TextBlock Text="Срочность" />
+        <!-- Источник записей - вьюмодель, выбранная запись редактирует свойство в EditNote  -->
+        <ComboBox ItemsSource="{Binding Statuses}" SelectedItem="{Binding Path=EditNote.Status}"
+                  HorizontalAlignment="Stretch" />
+        <StackPanel Orientation="Horizontal">
+            <!-- кнопки привязаны к командам -->
+            <Button Content="Удалить" Command="{Binding RemoveCommand}" />
+            <Button HorizontalAlignment="Right" Content="Сохранить и закрыть" Command="{Binding Path=CloseCommand}" />
+        </StackPanel>
+    </StackPanel>
+</Window>

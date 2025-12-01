@@ -1,0 +1,44 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ns="clr-namespace:AvaloniaList1125_25.ViewModels"
+        xmlns:models="clr-namespace:AvaloniaList1125_25.Models"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaList1125_25.MainWindow"
+        DataContext="{StaticResource Vm}"
+        x:DataType="ns:MainWindowVM"
+        SizeToContent="WidthAndHeight"
+        Title="Записная книжка">
+    <Window.Resources>
+        <!-- создание экземпляра вьюмодели -->
+        <ns:MainWindowVM x:Key="Vm" />
+    </Window.Resources>
+    <Window.DataTemplates>
+        <!-- создание представления для типа NoteVM, чтобы мы в списке видели данные, а не название класса объекта -->
+        <DataTemplate DataType="models:NoteVM">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="{Binding Path=DateCreated}" />
+                <Label Content="{Binding Title}" MinWidth="350" />
+                <!-- у кнопки подставлен другой датаконтекст, для того, чтобы была досупна команда из основной вьюмодели -->
+                <Label Content="{Binding Status}" />
+                <Button Content="Редактировать"
+                        DataContext="{StaticResource Vm}"
+                        x:DataType="ns:MainWindowVM"
+                        Command="{Binding EditNoteCommand}" />
+            </StackPanel>
+        </DataTemplate>
+    </Window.DataTemplates>
+    <Grid RowDefinitions="Auto *">
+        <Menu>
+            <MenuItem Header="Действия">
+                <!-- Менюшка вызывает команду, команда лежит в вьюмодели в виде свойства -->
+                <MenuItem Header="Добавить заметку" Command="{Binding Path=AddNoteCommand}" />
+            </MenuItem>
+        </Menu>
+        <!-- листбокс получает список из свойства на вьюмодели
+        у листбокса указано свойство SelectedItem для контроля выбранной записи -->
+        <ListBox Grid.Row="1" ItemsSource="{Binding Path=Notes}"
+                 SelectedItem="{Binding SelectedNote}" />
+    </Grid>
+</Window>
