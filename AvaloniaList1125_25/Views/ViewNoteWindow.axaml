@@ -1,0 +1,21 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="clr-namespace:AvaloniaList1125_25.Models"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaList1125_25.Views.ViewNoteWindow"
+        x:DataType="models:NoteVM"
+        Title="Подробности заметки" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+    <StackPanel>
+        <TextBlock Text="Заголовок" />
+        <!-- привязки отображают значения вложенного объекта EditNote -->
+        <TextBlock Text="{Binding Path=Title}" />
+        <TextBlock Text="Содержимое" />
+        <TextBlock Text="{Binding Path=Content}" />
+        <TextBlock Text="Срочность" />
+        <TextBlock Text="{Binding Path=Status}" />
+        <TextBlock Text="Дата создания" />
+        <TextBlock Text="{Binding Path=DateCreated, StringFormat=dd.MM.yyyy}" />
+    </StackPanel>
+</Window>

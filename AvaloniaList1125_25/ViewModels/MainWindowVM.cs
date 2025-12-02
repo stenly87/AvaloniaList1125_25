@@ -68,4 +68,11 @@ public class MainWindowVM : BaseVM
             }
         });
     }
+
+    public NoteVM SelectedNote { get; set; }
+    public void SendDoubleTap()
+    {
+        if (SelectedNote != null)
+            new ViewNoteWindow(SelectedNote).Show();
+    }
 }

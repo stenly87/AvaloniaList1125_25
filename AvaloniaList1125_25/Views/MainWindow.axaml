@@ -37,6 +37,9 @@
         </Menu>
         <!-- листбокс получает список из свойства на вьюмодели
         у листбокса указано свойство SelectedItem для контроля выбранной записи -->
-        <ListBox Grid.Row="1" ItemsSource="{Binding Path=Notes}" />
+        <ListBox Grid.Row="1" 
+                 ItemsSource="{Binding Path=Notes}" 
+                 SelectedItem="{Binding SelectedNote}" 
+                 DoubleTapped="ViewNoteDoubleTap" />
     </Grid>
 </Window>
